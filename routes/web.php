@@ -8,6 +8,20 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
+Route::get('customer/register', [CustomerController::class, 'index'])->name('customer.register');
+Route::post('customer/store', [CustomerController::class, 'store'])->name('customer.store');
+
+Route::get('verify/{id}', [CustomerController::class, 'verification'])->name('verification');
+
+Route::get('admin/register', [AdminController::class, 'index'])->name('admin.register');
+Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store');
+
+Route::get('custom/login', [LoginController::class, 'index'])->name('custom.login');
+Route::post('custom/login', [LoginController::class, 'Authentication'])->name('customs.login');
+
+
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -21,16 +35,6 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('customer/register', [CustomerController::class, 'index'])->name('customer.register');
-Route::post('customer/store', [CustomerController::class, 'store'])->name('customer.store');
-
-Route::get('verify/{id}', [CustomerController::class, 'verification'])->name('verification');
-
-Route::get('admin/register', [AdminController::class, 'index'])->name('admin.register');
-Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store');
-
-Route::get('custom/login', [LoginController::class, 'index'])->name('custom.login');
-Route::post('custom/login', [LoginController::class, 'Authentication'])->name('customs.login');
 
 
 // Route::middleware('auth')->group(function () {
